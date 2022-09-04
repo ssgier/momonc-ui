@@ -1,19 +1,109 @@
 <template>
   <div class="run-config">
-    <h3>Run Configuration</h3>
-    <div class="config-item">
-      <label>Program:</label>
-      <input value="python" />
-    </div>
-    <div class="config-item">
-      <label>Arg #1:</label>
-      <input value="~/git/momonc-service/scripts/obj_func_mock.py" />
-    </div>
+    <section class="section">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="block">
+            <h1 class="title is-4">Run Configuration</h1>
+          </div>
+          <div class="block">
+            <h1 class="subtitle is-6">Objective Function Executable</h1>
+          </div>
+          <div class="block">
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Program</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input class="input" type="text" value="python" />
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <div class="run-button">
-      <label></label>
-      <button>Run</button>
-    </div>
+            <div class="field is-horizontal">
+              <div class="field-label">
+                <label class="label">Arg #1</label>
+              </div>
+              <div class="field-body">
+                <div class="field is-expanded">
+                  <div class="field has-addons">
+                    <p class="control is-expanded">
+                      <input
+                        class="input"
+                        type="tel"
+                        placeholder="Your phone number"
+                        value="~/git/momonc-service/scripts/obj_func_mock.py"
+                      />
+                    </p>
+                    <p class="control">
+                      <a class="button is-static"> + </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="is-divider"></div>
+
+          <div class="block">
+            <h1 class="subtitle is-6">Optimizer</h1>
+          </div>
+          <div class="block">
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Algorithm</label>
+              </div>
+              <div class="field-body">
+                <div class="field is-narrow">
+                  <div class="control">
+                    <div class="select is-fullwidth">
+                      <select>
+                        <option>Parallel Hill Climbing</option>
+                        <option>Genetic Algorithm</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Parallelism</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input class="input" type="number" value="20" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Relative StdDev</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input class="input" value="0.01" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="block">
+            <button class="button is-dark" type="button">Run</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -27,33 +117,4 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  margin: 0 0 40px;
-  text-align: center;
-}
-
-label {
-  display: inline-block;
-  width: 80px;
-  text-align: left;
-}
-
-.run-config {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.config-item {
-  width: 300px;
-  margin: 5px auto;
-}
-
-.run-button {
-  width: 300px;
-  height: 20px;
-  margin: 5px auto;
-  text-align: left;
-}
 </style>
