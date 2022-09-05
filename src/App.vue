@@ -1,17 +1,16 @@
 <template>
-  <RunConfig/>
+  <RunConfig />
 </template>
 
 <script>
-import RunConfig from './components/RunConfig.vue'
+import RunConfig from "./components/RunConfig.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    RunConfig
-  }
-}
+    RunConfig,
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>
