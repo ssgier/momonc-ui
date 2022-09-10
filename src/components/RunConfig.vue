@@ -19,7 +19,9 @@
             <div class="level-left"></div>
             <div class="level-right">
               <div class="level-item">
-                <button class="button is-dark" type="button">Run</button>
+                <button class="button is-dark" type="button" @click="startRun">
+                  Run
+                </button>
               </div>
             </div>
           </div>
@@ -32,11 +34,25 @@
 <script>
 import AlgoConfigEntry from "./AlgoConfigEntry.vue";
 import ExecutableEntry from "./ExecutableEntry.vue";
+import { startRun } from "../service/serviceCalls.js";
+import { store } from "../store.js";
+
 export default {
   name: "RunConfig",
   components: {
     AlgoConfigEntry,
     ExecutableEntry,
+  },
+  data() {
+    return {
+      uiState: store.state.uiState,
+      commState: store.state.commState,
+    };
+  },
+  methods: {
+    startRun() {
+      startRun(this.commState, this.uiState);
+    },
   },
 };
 </script>

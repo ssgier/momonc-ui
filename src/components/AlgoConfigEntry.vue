@@ -27,7 +27,7 @@
             <input
               class="input"
               type="number"
-              v-model="sharedState.frontEndState.parallelism"
+              v-model="uiState.parallelism"
             />
           </div>
         </div>
@@ -43,7 +43,7 @@
           <div class="control">
             <input
               class="input"
-              v-model="sharedState.frontEndState.relativeStdDev"
+              v-model="uiState.relativeStdDev"
             />
           </div>
         </div>
@@ -58,7 +58,7 @@ export default {
   name: "AlgoConfigEntry",
   data() {
     return {
-      sharedState: store.state,
+      uiState: store.state.uiState,
     };
   },
 };

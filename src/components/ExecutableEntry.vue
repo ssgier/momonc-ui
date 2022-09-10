@@ -8,11 +8,7 @@
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input
-              class="input"
-              type="text"
-              v-model="this.sharedState.frontEndState.specFile"
-            />
+            <input class="input" type="text" v-model="this.uiState.specFile" />
           </div>
         </div>
       </div>
@@ -29,7 +25,7 @@
             <input
               class="input"
               type="text"
-              v-model="this.sharedState.frontEndState.executable"
+              v-model="this.uiState.executable"
             />
           </div>
         </div>
@@ -37,7 +33,7 @@
     </div>
 
     <div
-      v-for="(arg, index) in this.sharedState.frontEndState.args"
+      v-for="(arg, index) in this.uiState.args"
       :key="index"
       class="field is-horizontal"
     >
@@ -90,7 +86,7 @@ export default {
   name: "ExecutableEntry",
   data() {
     return {
-      sharedState: store.state,
+      uiState: store.state.uiState,
       argToAdd: "",
     };
   },
@@ -101,11 +97,11 @@ export default {
   },
   methods: {
     addArg() {
-      this.sharedState.frontEndState.addArg(this.argToAdd);
+      this.uiState.addArg(this.argToAdd);
       this.argToAdd = "";
     },
     removeArg(index) {
-      this.sharedState.frontEndState.removeArg(index);
+      this.uiState.removeArg(index);
     },
   },
   components: {
