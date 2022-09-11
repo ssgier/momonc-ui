@@ -1,8 +1,8 @@
 export function handleMessage(sharedState, message_text) {
   let message = JSON.parse(message_text);
   sharedState.commState.requestState = "ready";
-  sharedState.domainState = message.DomainState;
   if (message.DomainState) {
+    sharedState.domainState = message.DomainState;
     if (sharedState.domainState.Idle) {
       let default_data = sharedState.domainState.Idle;
       sharedState.uiState.specFile = default_data.spec_file;
@@ -16,5 +16,7 @@ export function handleMessage(sharedState, message_text) {
         sharedState.uiState.relativeStdDev = conf.relative_std_dev;
       }
     }
+  } else if (message.CandidateEvalReport) {
+    sharedState.processingState.latestEval = message.CandidateEvalReport;
   }
 }

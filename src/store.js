@@ -19,6 +19,7 @@ export const store = {
       state: "disconnected",
       requestState: "ready",
     },
-    domainState: {},
+    domainState: undefined,
+    processingState: { latestEval: undefined },
   },
 };

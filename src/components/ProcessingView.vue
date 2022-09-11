@@ -1,6 +1,9 @@
 <template>
   <div>Processing...</div>
-  <button class="button is-danger" @click="stopRun">Stop</button>
+  <div><button class="button is-danger" @click="stopRun">Stop</button></div>
+  <div>
+    {{ processingStateText }}
+  </div>
 </template>
 
 <script>
@@ -13,6 +16,11 @@ export default {
     return {
       sharedState: store.state,
     };
+  },
+  computed: {
+    processingStateText() {
+        return JSON.stringify(this.sharedState.processingState.latestEval);
+    }
   },
   methods: {
     stopRun() {
