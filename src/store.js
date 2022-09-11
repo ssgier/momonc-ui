@@ -16,6 +16,8 @@ export const store = {
     },
     commState: {
       webSocket: undefined,
+      state: "disconnected",
+      requestState: "ready",
     },
     domainState: {},
   },

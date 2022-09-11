@@ -19,7 +19,7 @@
             <div class="level-left"></div>
             <div class="level-right">
               <div class="level-item">
-                <button class="button is-dark" type="button" @click="startRun">
+                <button :disabled="runButtonDisabled" class="button is-dark" type="button" @click="startRun">
                   Run
                 </button>
               </div>
@@ -49,9 +49,15 @@ export default {
       commState: store.state.commState,
     };
   },
+  computed: {
+    runButtonDisabled() {
+        return this.commState.requestState !== "ready";
+    }
+  },
   methods: {
     startRun() {
       startRun(this.commState, this.uiState);
+      this.commState.requestState = "pending";
     },
   },
 };
