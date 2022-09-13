@@ -4,9 +4,11 @@
       :chart-options="chartOptions"
       :chart-data="chartData"
       :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
       :width="width"
       :height="height"
+      :cssClasses="cssClasses"
+      :styles="styles"
+      :plugins="plugins"
     />
   </div>
 </template>
@@ -23,6 +25,8 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
+  LineController,
+  ScatterController,
 } from "chart.js";
 
 ChartJS.register(
@@ -32,7 +36,9 @@ ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement
+  PointElement,
+  LineController,
+  ScatterController
 );
 
 export default {
@@ -48,7 +54,7 @@ export default {
   props: {
     chartId: {
       type: String,
-      default: "scatter-chart",
+      default: "bar-chart",
     },
     width: {
       type: Number,
@@ -89,8 +95,7 @@ export default {
         );
       }
 
-      min_x_value = Math.min(-30, min_x_value);
-      min_x_value = Math.floor(min_x_value / 10) * 10;
+      min_x_value = Math.min(-10, min_x_value);
       return min_x_value;
     },
     chartOptions() {
@@ -102,6 +107,10 @@ export default {
           x: {
             grid: {
               display: false,
+            },
+            title: {
+                display: true,
+                text: "Time [s]",
             },
             min: this.computeMinXValue,
             max: 0,
@@ -141,6 +150,10 @@ export default {
                 ),
                 y: bestSeenVal,
               });
+              dataBestSeen.push({
+                x: null,
+                y: null
+              });
             }
             dataBestSeen.push({
               x: this.convertTimeToRelativeFromNow(evalReport.completion_time),
@@ -158,6 +171,7 @@ export default {
       return {
         datasets: [
           {
+            type: "line",
             label: "Best Seen",
             fill: false,
             borderColor: "#008080",
@@ -168,6 +182,7 @@ export default {
             showLine: true,
           },
           {
+            type: "scatter",
             label: "Candidate Evaluations",
             fill: false,
             borderColor: "#cccccc",
