@@ -10,6 +10,7 @@ import RunConfig from "./components/RunConfig.vue";
 import ProcessingView from "./components/ProcessingView.vue";
 import { store } from "./store.js";
 import { handleMessage } from "./service/messageHandlers.js";
+import startRefresher from "./refresh.js";
 
 export default {
   name: "App",
@@ -27,7 +28,7 @@ export default {
       return this.sharedState.commState.state === "disconnected";
     },
     showRunConfig() {
-      return this.sharedState.domainState.Idle;
+      return this.sharedState.domainState && this.sharedState.domainState.Idle;
     },
     showProcessingView() {
       return this.sharedState.domainState === "Processing";
@@ -46,6 +47,7 @@ export default {
     webSocket.addEventListener("message", (event) => {
       handleMessage(this.sharedState, event.data);
     });
+    startRefresher(this.sharedState.processingState);
   },
   beforeUnmount() {
     this.sharedState.commState.webSocket.close();

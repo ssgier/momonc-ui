@@ -1,3 +1,9 @@
+export const processingStateResetValue = {
+  processingStartTime: undefined,
+  candidateEvalQueue: undefined,
+  timeElapsed: undefined,
+};
+
 export const store = {
   state: {
     uiState: {
@@ -20,6 +26,6 @@ export const store = {
       requestState: "ready",
     },
     domainState: undefined,
-    processingState: { latestEval: undefined },
+    processingState: processingStateResetValue,
   },
 };
