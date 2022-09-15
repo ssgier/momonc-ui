@@ -1,8 +1,19 @@
-export const processingStateResetValue = {
+const processingStateResetValue = {
   processingStartTime: undefined,
   candidateEvalQueue: undefined,
   timeElapsed: undefined,
 };
+
+export function resetProcessingState(sharedState) {
+  sharedState.processingState = {
+    ...processingStateResetValue,
+  };
+  sharedState.processingState = {
+    processingStartTime: undefined,
+    candidateEvalQueue: undefined,
+    timeElapsed: undefined,
+  };
+}
 
 export const store = {
   state: {

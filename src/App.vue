@@ -31,7 +31,9 @@ export default {
       return this.sharedState.domainState && this.sharedState.domainState.Idle;
     },
     showProcessingView() {
-      return this.sharedState.domainState === "Processing";
+      return (
+        this.sharedState.domainState && this.sharedState.domainState.Processing
+      );
     },
   },
   created() {
@@ -47,7 +49,7 @@ export default {
     webSocket.addEventListener("message", (event) => {
       handleMessage(this.sharedState, event.data);
     });
-    startRefresher(this.sharedState.processingState);
+    startRefresher(this.sharedState);
   },
   beforeUnmount() {
     this.sharedState.commState.webSocket.close();

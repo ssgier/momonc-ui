@@ -108,10 +108,6 @@ export default {
             grid: {
               display: false,
             },
-            title: {
-                display: true,
-                text: "Time [s]",
-            },
             min: this.computeMinXValue,
             max: 0,
           },
@@ -126,9 +122,19 @@ export default {
     chartData() {
       let dataCandidateEvals = [];
       let dataBestSeen = [];
-      let bestSeenVal = undefined;
 
       const candidateEvalQueue = this.processingState.candidateEvalQueue;
+
+      if (
+        !candidateEvalQueue.isEmpty() &&
+        candidateEvalQueue.peek().best_seen_obj_func_val_before
+      ) {
+        dataBestSeen.push({
+          x: this.computeMinXValue,
+          y: candidateEvalQueue.peek().best_seen_obj_func_val_before,
+        });
+      }
+
       candidateEvalQueue._list.forEach((evalReport) => {
         evalReport = evalReport.data;
         if (evalReport.obj_func_val) {
@@ -142,31 +148,40 @@ export default {
           });
           dataCandidateEvals.push({ x: null, y: null });
 
-          if (!bestSeenVal || evalReport.obj_func_val < bestSeenVal) {
-            if (bestSeenVal) {
+          const terminateSegment =
+            evalReport.best_seen_obj_func_val_before &&
+            evalReport.obj_func_val < evalReport.best_seen_obj_func_val_before;
+          const drawCurrentAsBestSeen =
+            !evalReport.best_seen_obj_func_val_before ||
+            evalReport.obj_func_val < evalReport.best_seen_obj_func_val_before;
+
+          if (drawCurrentAsBestSeen) {
+            if (terminateSegment) {
               dataBestSeen.push({
                 x: this.convertTimeToRelativeFromNow(
                   evalReport.completion_time
                 ),
-                y: bestSeenVal,
+                y: evalReport.best_seen_obj_func_val_before,
               });
               dataBestSeen.push({
                 x: null,
-                y: null
+                y: null,
               });
             }
             dataBestSeen.push({
               x: this.convertTimeToRelativeFromNow(evalReport.completion_time),
               y: evalReport.obj_func_val,
             });
-            bestSeenVal = evalReport.obj_func_val;
           }
-          dataBestSeen.push({
-            x: this.convertTimeToRelativeFromNow(evalReport.completion_time),
-            y: bestSeenVal,
-          });
         }
       });
+
+      if (dataBestSeen.length) {
+        dataBestSeen.push({
+          x: 0,
+          y: dataBestSeen[dataBestSeen.length - 1].y,
+        });
+      }
 
       return {
         datasets: [
