@@ -79,15 +79,14 @@ export default {
   },
   data() {
     return {
-      showWindowLengthSeconds: 60,
       processingState: store.state.processingState,
     };
   },
   computed: {
     computeMinXValue() {
-      let min_x_value = -this.showWindowLengthSeconds;
+      let min_x_value = -0;
       if (!this.processingState.candidateEvalQueue.isEmpty()) {
-        min_x_value = Math.max(
+        min_x_value = Math.min(
           min_x_value,
           this.convertTimeToRelativeFromNow(
             this.processingState.candidateEvalQueue.peek().start_time
@@ -95,7 +94,6 @@ export default {
         );
       }
 
-      min_x_value = Math.min(-10, min_x_value);
       return min_x_value;
     },
     chartOptions() {

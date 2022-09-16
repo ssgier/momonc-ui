@@ -1,4 +1,3 @@
-import config from "./config.js";
 import { handleMessage } from "./service/messageHandlers.js";
 
 export function refresh(sharedState, timeElapsed) {
@@ -6,11 +5,7 @@ export function refresh(sharedState, timeElapsed) {
   if (processingState.candidateEvalQueue) {
     const queue = processingState.candidateEvalQueue;
     processingState.timeElapsed = timeElapsed;
-    while (
-      !queue.isEmpty() &&
-      processingState.timeElapsed - queue.peek().completion_time >
-        config.candidateEvolutionChart.windowLengthSeconds
-    ) {
+    while (queue.size() > sharedState.domainState.Processing.window_size_hint) {
       queue.dequeue();
     }
   }
