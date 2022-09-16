@@ -89,7 +89,11 @@ export default {
         min_x_value = Math.min(
           min_x_value,
           this.convertTimeToRelativeFromNow(
-            this.processingState.candidateEvalQueue.peek().start_time
+            this.processingState.candidateEvalQueue.peek()
+              .latest_interleaving_completion_time
+              ? this.processingState.candidateEvalQueue.peek()
+                  .latest_interleaving_completion_time
+              : this.processingState.candidateEvalQueue.peek().start_time
           )
         );
       }

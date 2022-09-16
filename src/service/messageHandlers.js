@@ -40,7 +40,5 @@ function prepareProcessingState(sharedState) {
 }
 
 function handleCandidateEvalReport(sharedState, candidateEvalReport) {
-    // TODO: reports must be sorted by start_time. This is currently also the order
-    // at which they arrive, but will not be generally true. This needs to be solved.
   sharedState.processingState.candidateEvalQueue.enqueue(candidateEvalReport);
 }
