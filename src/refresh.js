@@ -1,15 +1,11 @@
 import config from "./config.js";
+import { handleMessage } from "./service/messageHandlers.js";
 
-export default function startRefresher(sharedState) {
-  setInterval(() => refresh(sharedState), config.refreshIntervalMs);
-}
-
-export function refresh(sharedState) {
+export function refresh(sharedState, timeElapsed) {
   const processingState = sharedState.processingState;
-  if (processingState.processingStartTime) {
+  if (processingState.candidateEvalQueue) {
     const queue = processingState.candidateEvalQueue;
-    processingState.timeElapsed =
-      1e-3 * Date.now() - processingState.processingStartTime;
+    processingState.timeElapsed = timeElapsed;
     while (
       !queue.isEmpty() &&
       processingState.timeElapsed - queue.peek().completion_time >
@@ -17,5 +13,27 @@ export function refresh(sharedState) {
     ) {
       queue.dequeue();
     }
+  }
+
+  handleComm(sharedState);
+}
+
+function handleComm(sharedState) {
+  if (sharedState.commState.state === "disconnected") {
+    let webSocket = (sharedState.commState.webSocket = new WebSocket(
+      "ws://127.0.0.1:3000"
+    ));
+    webSocket.addEventListener("open", () => {
+      sharedState.commState.state = "connected";
+    });
+    webSocket.addEventListener("close", () => {
+      sharedState.commState.state = "disconnected";
+    });
+    webSocket.addEventListener("error", () => {
+      sharedState.commState.state = "disconnected";
+    });
+    webSocket.addEventListener("message", (event) => {
+      handleMessage(sharedState, event.data);
+    });
   }
 }

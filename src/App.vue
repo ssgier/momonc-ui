@@ -9,8 +9,7 @@
 import RunConfig from "./components/RunConfig.vue";
 import ProcessingView from "./components/ProcessingView.vue";
 import { store } from "./store.js";
-import { handleMessage } from "./service/messageHandlers.js";
-import startRefresher from "./refresh.js";
+import { refresh } from "./refresh.js";
 
 export default {
   name: "App",
@@ -37,19 +36,7 @@ export default {
     },
   },
   created() {
-    let webSocket = (this.sharedState.commState.webSocket = new WebSocket(
-      "ws://127.0.0.1:3000"
-    ));
-    webSocket.addEventListener("open", () => {
-      this.sharedState.commState.state = "connected";
-    });
-    webSocket.addEventListener("close", () => {
-      this.sharedState.commState.state = "disconnected";
-    });
-    webSocket.addEventListener("message", (event) => {
-      handleMessage(this.sharedState, event.data);
-    });
-    startRefresher(this.sharedState);
+    refresh(this.sharedState);
   },
   beforeUnmount() {
     this.sharedState.commState.webSocket.close();

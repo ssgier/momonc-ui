@@ -25,19 +25,18 @@ export function handleMessage(sharedState, message_text) {
     }
   } else if (message.CandidateEvalReport) {
     handleCandidateEvalReport(sharedState, message.CandidateEvalReport);
+  } else if (message.Time) {
+    refresh(sharedState, message.Time);
   }
 }
 
 function prepareProcessingState(sharedState) {
   const processingStateMessage = sharedState.domainState.Processing;
-  sharedState.processingState.processingStartTime =
-    1e-3 * Date.now() - processingStateMessage.time;
   sharedState.processingState.candidateEvalQueue = new Queue();
-  sharedState.processingState.timeElapsed = 0.0;
   processingStateMessage.recent_candidate_eval_reports.forEach((report) =>
     handleCandidateEvalReport(sharedState, report)
   );
-  refresh(sharedState);
+  refresh(sharedState, processingStateMessage.time);
 }
 
 function handleCandidateEvalReport(sharedState, candidateEvalReport) {

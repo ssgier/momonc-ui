@@ -1,5 +1,4 @@
 const processingStateResetValue = {
-  processingStartTime: undefined,
   candidateEvalQueue: undefined,
   timeElapsed: undefined,
 };
@@ -7,11 +6,6 @@ const processingStateResetValue = {
 export function resetProcessingState(sharedState) {
   sharedState.processingState = {
     ...processingStateResetValue,
-  };
-  sharedState.processingState = {
-    processingStartTime: undefined,
-    candidateEvalQueue: undefined,
-    timeElapsed: undefined,
   };
 }
 
