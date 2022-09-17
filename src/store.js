@@ -1,5 +1,6 @@
 const processingStateResetValue = {
   candidateEvalQueue: undefined,
+  bestSeenCandidates: undefined,
   timeElapsed: undefined,
 };
 

@@ -1,19 +1,12 @@
 <template>
   <div class="containerwide">
     <div class="row">
-      <div class="6 col">
+      <div class="6 col card">
         <CandidateEvolutionChart />
       </div>
 
-      <div class="6 col">
-        <table class="w-100">
-          <thead>
-            <tr>
-              <th>Objective Function Value</th>
-              <th>Evaluation Time [s]</th>
-            </tr>
-          </thead>
-        </table>
+      <div class="6 col card">
+      <BestSeenTable/>
       </div>
     </div>
     <div class="row">
@@ -29,6 +22,7 @@
 import { store } from "../store.js";
 import { stopRun } from "../service/serviceCalls.js";
 import CandidateEvolutionChart from "./CandidateEvolutionChart.vue";
+import BestSeenTable from "./BestSeenTable.vue";
 
 export default {
   name: "ProcessingView",
@@ -39,6 +33,7 @@ export default {
   },
   components: {
     CandidateEvolutionChart,
+    BestSeenTable
   },
   computed: {},
   methods: {

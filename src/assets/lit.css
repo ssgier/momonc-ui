@@ -28,7 +28,6 @@ SOFTWARE.
  *
  */
 
-
 /*
 * Lit v0.1
 * Primary Color set to: #FA0
@@ -36,155 +35,162 @@ SOFTWARE.
 */
 
 :root {
-    --font: nunito;
-    --primary-color: #008080;
-    --light: #eee;
+  --font: nunito;
+  --primary-color: #008080;
+  --light: #eee;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-*+* {
-    margin: .5em 0;
+* + * {
+  margin: 0.5em 0;
 }
 
 pre {
-    overflow: auto
+  overflow: auto;
 }
 
-@media(min-width:35em) {
-    .col {
-        display: table-cell;
-        vertical-align: top;
-    }
+@media (min-width: 35em) {
+  .col {
+    display: table-cell;
+    vertical-align: top;
+  }
 
-    .\31 {
-        width: 5%;
-    }
+  .\31 {
+    width: 5%;
+  }
 
-    .\33 {
-        width: 22%;
-    }
+  .\33 {
+    width: 22%;
+  }
 
-    .\34 {
-        width: 30%;
-    }
+  .\34 {
+    width: 30%;
+  }
 
-    .\35 {
-        width: 40%;
-    }
+  .\35 {
+    width: 40%;
+  }
 
-    .\32 {
-        width: 15%;
-    }
+  .\32 {
+    width: 15%;
+  }
 
-    .\36 {
-        width: 50%;
-    }
+  .\36 {
+    width: 50%;
+  }
 
-    .row {
-        display: table;
-        border-spacing: 1em 0;
-    }
+  .row {
+    display: table;
+    border-spacing: 1em 0;
+  }
 }
 
 .w-100,
 .row {
-    width: 100%;
+  width: 100%;
 }
 
 .card:focus,
 hr {
-    outline: 0;
-    border: solid var(--primary-color);
+  outline: 0;
+  border: solid var(--primary-color) 1px;
 }
 
 .card,
 pre {
-    padding: 0.5em 1em;
-    border: solid var(--light);
+  padding: 0.5em 1em;
+  border: 1px solid var(--light);
 }
 
 a:hover,
 .btn:hover {
-    opacity: .6;
+  opacity: 0.6;
 }
 
 .btn:disabled {
-    color: #bbbbbb;
-    background: #999999;
-    border: solid #999999;
-    opacity: 1;
+  color: #bbbbbb;
+  background: #999999;
+  border: solid #999999;
+  opacity: 1;
 }
 
 .containerwide {
-    max-width: 80em;
-    padding: 1em;
-    margin: auto;
-    font: 1em/1.6 var(--font);
+  max-width: 80em;
+  padding: 1em;
+  margin: auto;
+  font: 1em/1.6 var(--font);
 }
 
 .containernarrow {
-    max-width: 50em;
-    padding: 1em;
-    margin: auto;
-    font: 1em/1.6 var(--font);
+  max-width: 50em;
+  padding: 1em;
+  margin: auto;
+  font: 1em/1.6 var(--font);
 }
 
 h6 {
-    font: 100 1em var(--font);
+  font: 100 1em var(--font);
 }
 
 h5 {
-    font: 100 1.2em var(--font);
+  font: 100 1.2em var(--font);
 }
 
 h3 {
-    font: 100 2em var(--font);
+  font: 100 2em var(--font);
 }
 
 h4 {
-    font: 100 1.5em var(--font);
+  font: 100 1.5em var(--font);
 }
 
 h2 {
-    font: 100 2.2em var(--font);
+  font: 100 2.2em var(--font);
 }
 
 h1 {
-    font: 100 2.5em var(--font);
+  font: 100 2.5em var(--font);
 }
 
 a {
-    color: var(--primary-color);
-    text-decoration: none;
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
 .btn.primary {
-    color: white;
-    background: var(--primary-color);
-    border: solid var(--primary-color);
+  color: white;
+  background: var(--primary-color);
+  border: solid var(--primary-color);
 }
 
 td,
 th {
-    padding: 0.5em 1em;
-    text-align: left;
-    border-bottom: solid var(--light);
+  padding: 0.2em 1em;
+  text-align: right;
+  border-bottom: solid var(--light);
+  font: 0.8em var(--font);
+}
+
+th {
+  text-align: left;
+  font-weight: bold;
 }
 
 .btn {
-    padding: 0.5em 1em;
-    text-transform: uppercase;
-    color: white;
-    background: gray;
-    border: solid gray;
-    font: .7em var(--font);
+  padding: 0.5em 1em;
+  text-transform: uppercase;
+  color: white;
+  background: gray;
+  border: solid gray;
+  font: 0.7em var(--font);
+  font-weight: bold;
 }
 
 .colstretch {
-    padding: 0.5em 0;
-    display: inline-block;
-    width: 100%;
+  padding: 0.5em 0;
+  display: inline-block;
+  width: 100%;
 }

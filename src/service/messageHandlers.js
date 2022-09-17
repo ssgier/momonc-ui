@@ -33,6 +33,8 @@ export function handleMessage(sharedState, message_text) {
 function prepareProcessingState(sharedState) {
   const processingStateMessage = sharedState.domainState.Processing;
   sharedState.processingState.candidateEvalQueue = new Queue();
+  sharedState.processingState.bestSeenCandidates =
+    processingStateMessage.best_seen_candidate_eval_reports;
   processingStateMessage.recent_candidate_eval_reports.forEach((report) =>
     handleCandidateEvalReport(sharedState, report)
   );
@@ -40,5 +42,22 @@ function prepareProcessingState(sharedState) {
 }
 
 function handleCandidateEvalReport(sharedState, candidateEvalReport) {
-  sharedState.processingState.candidateEvalQueue.enqueue(candidateEvalReport);
+  if (candidateEvalReport.obj_func_val) {
+    sharedState.processingState.candidateEvalQueue.enqueue(candidateEvalReport);
+
+    const bestSeenCandidates = sharedState.processingState.bestSeenCandidates;
+    const tableSizeHint =
+      sharedState.domainState.Processing.best_seen_table_size_hint;
+    if (
+      bestSeenCandidates.length < tableSizeHint ||
+      candidateEvalReport.obj_func_val <
+        bestSeenCandidates[bestSeenCandidates.length - 1].obj_func_val
+    ) {
+      bestSeenCandidates.push(candidateEvalReport);
+      bestSeenCandidates.sort((a, b) => a.obj_func_val - b.obj_func_val);
+      if (bestSeenCandidates.length > tableSizeHint) {
+        bestSeenCandidates.pop();
+      }
+    }
+  }
 }

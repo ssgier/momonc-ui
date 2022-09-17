@@ -1,4 +1,5 @@
 <template>
+  Objective Function
   <div>
     <Scatter
       :chart-options="chartOptions"
@@ -62,7 +63,7 @@ export default {
     },
     height: {
       type: Number,
-      default: 400,
+      default: 250,
     },
     cssClasses: {
       default: "",
@@ -109,6 +110,10 @@ export default {
           x: {
             grid: {
               display: false,
+            },
+            title: {
+                display: true,
+                text: "Time [s]"
             },
             min: this.computeMinXValue,
             max: 0,

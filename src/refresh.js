@@ -5,7 +5,7 @@ export function refresh(sharedState, timeElapsed) {
   if (processingState.candidateEvalQueue) {
     const queue = processingState.candidateEvalQueue;
     processingState.timeElapsed = timeElapsed;
-    while (queue.size() > sharedState.domainState.Processing.window_size_hint) {
+    while (queue.size() > sharedState.domainState.Processing.window_length_hint) {
       queue.dequeue();
     }
   }
