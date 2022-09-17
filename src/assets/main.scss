@@ -1,7 +1,6 @@
-$scheme-main: white;
-$radius: 0px;
-$body-font-size: 0.8em;
-$size-6: 0.85rem;
+//* {
+  //-webkit-font-smoothing: antialiased;
+  //-moz-osx-font-smoothing: grayscale;
+//}
 
-@import "~bulma";
-@import "~bulma-extensions";
+@import "lit.css";

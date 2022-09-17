@@ -1,8 +1,10 @@
 <template>
+<div>
   <p v-if="is_disconnected">Connecting...</p>
   <RunConfig v-else-if="showRunConfig" />
   <ProcessingView v-else-if="showProcessingView" />
   <p v-else>Terminal</p>
+</div>
 </template>
 
 <script>

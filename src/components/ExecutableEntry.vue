@@ -1,75 +1,45 @@
 <template>
-  <div class="block">
-    <div class="field is-horizontal">
-      <div class="field-label">
-        <label class="label">Spec File</label>
-      </div>
-
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <input class="input" type="text" v-model="this.uiState.specFile" />
+  <div class="row">
+    <div class="6 col">
+      Spec File
+      <input class="card w-100" type="text" v-model="this.uiState.specFile" />
+    </div>
+    <div class="6 col">
+      Executable
+      <input class="card w-100" type="text" v-model="this.uiState.executable" />
+    </div>
+  </div>
+  <div class="row">
+    Args
+    <div v-for="(arg, index) in this.uiState.args" :key="index" class="row">
+      <div class="col">
+        <div class="row">
+          <div class="1 col" style="text-align:right">#{{ index + 1 }}</div>
+          <div class="12 col">
+            <input class="card w-100" type="text" v-model="arg.value" />
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="field is-horizontal">
-      <div class="field-label">
-        <label class="label">Executable</label>
-      </div>
-
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              v-model="this.uiState.executable"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      v-for="(arg, index) in this.uiState.args"
-      :key="index"
-      class="field is-horizontal"
-    >
-      <div class="field-label">
-        <label class="label">Arg #{{ index + 1 }}</label>
-      </div>
-      <div class="field-body">
-        <div class="field has-addons">
-          <p class="control is-expanded">
-            <input class="input" type="text" v-model="arg.value" />
-          </p>
-          <p class="control button is-danger" @click="removeArg(index)">
-            <font-awesome-icon icon="fa fa-remove" inverse />
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="field is-horizontal">
-      <div class="field-label">
-        <label class="label"></label>
-      </div>
-      <div class="field-body">
-        <div class="field has-addons">
-          <p class="control is-expanded">
-            <input class="input" type="text" v-model="this.argToAdd" />
-          </p>
-          <p class="control">
-            <button
-              :disabled="isAddArgDisabled"
-              class="button is-light"
-              @click="addArg"
-            >
-              Add Arg
+          <div class="2 col">
+            <button class="btn colstretch" @click="removeArg(index)">
+              Remove
             </button>
-          </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row">
+        <div class="1 col"></div>
+        <div class="12 col">
+          <input class="card w-100" type="text" v-model="this.argToAdd" />
+        </div>
+        <div class="2 col">
+          <button
+            :disabled="isAddArgDisabled"
+            class="btn colstretch"
+            @click="addArg"
+          >
+            Add Arg
+          </button>
         </div>
       </div>
     </div>
@@ -77,11 +47,7 @@
 </template>
 
 <script>
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faRemove } from "@fortawesome/free-solid-svg-icons";
 import { store } from "../store.js";
-library.add(faRemove);
 export default {
   name: "ExecutableEntry",
   data() {
@@ -104,8 +70,6 @@ export default {
       this.uiState.removeArg(index);
     },
   },
-  components: {
-    FontAwesomeIcon,
-  },
+  components: {},
 };
 </script>
